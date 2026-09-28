@@ -49,6 +49,39 @@ def inicio():
     return {"mensaje": "API de Finanzas al Alcance funcionando"}
 
 
+@app.get("/productos")
+def obtener_productos():
+    return consultar(
+        "SELECT id, nombre_producto, precio, stock, id_provedor "
+        "FROM producto;"
+    )
+
+
+@app.get("/usuarios")
+def obtener_usuarios():
+    return consultar("SELECT id, nombre, apellido, tel FROM usuarios;")
+
+
+@app.get("/provedores")
+def obtener_provedores():
+    return consultar(
+        "SELECT id, nombre_empresa, cel, ubicacion "
+        "FROM provedor;"
+    )
+
+
+@app.get("/movimientos")
+def obtener_movimientos():
+    return consultar(
+        "SELECT m.idmov, m.id_producto, p.nombre_producto AS producto, "
+        "m.id_usuario, CONCAT_WS(' ', u.nombre, u.apellido) AS usuario, "
+        "m.fecha, m.tipo_mov "
+        "FROM movimientos AS m "
+        "JOIN producto AS p ON m.id_producto = p.id "
+        "JOIN usuarios AS u ON m.id_usuario = u.id;"
+    )
+
+
 @app.get("/categorias")
 def obtener_categorias():
     return consultar("SELECT * FROM categorias;")

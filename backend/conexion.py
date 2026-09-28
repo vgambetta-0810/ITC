@@ -14,7 +14,7 @@ def obtener_conexion():
         return mysql.connector.connect(
             host="localhost",
             port=3306,
-            database="finanzas_al_alcance",
+            database="PF2etapa",
             user="root",
             # Si MySQL tiene contraseña, definir MYSQL_PASSWORD en la terminal.
             password=os.environ.get("MYSQL_PASSWORD", ""),
